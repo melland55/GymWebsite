@@ -5,6 +5,8 @@
 
 # Compiled Typescript
 /dist/*
+!/dist/.gitkeep
 
 # System files
 /uploads/*
+!/uploads/.gitkeep
