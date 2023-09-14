@@ -41,7 +41,7 @@
       "label": "Start Frontend",
       "type": "npm",
       "script": "start",
-      "path": "${workspaceFolder}/frontend",
+      "path": "/frontend",
       "group": {
         "kind": "build",
         "isDefault": true
