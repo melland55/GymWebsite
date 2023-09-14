@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile Backend TypeScript",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^Compiled successfully",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Starting compilation in watch mode...",
+          "endsPattern": "^Watching for file changes."
+        }
+      }
+    },
+    {
+      "label": "Start Backend",
+      "type": "npm",
+      "script": "start",
+      "path": "/backend",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": ["Compile Backend TypeScript"]
+    },
+    {
+      "label": "Start Frontend",
+      "type": "npm",
+      "script": "start",
+      "path": "${workspaceFolder}/frontend",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

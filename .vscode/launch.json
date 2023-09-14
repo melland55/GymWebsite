@@ -1,44 +1,33 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-          "type": "chrome",
-          "request": "launch",
-          "name": "Launch Chrome against localhost",
-          "skipFiles": [
-              "<node_internals>/**"
-          ],
-          "url": "http://localhost:3000",
-          "webRoot": "${workspaceFolder}/frontend"
-      },
-      {
-          "type": "node",
-          "request": "launch",
-          "name": "Start React.js Server",
-          "program": "${workspaceFolder}/frontend/node_modules/react-scripts/scripts/start.js",
-          "args": [
-              "start"
-          ],
-          "cwd": "${workspaceFolder}/frontend",
-          "runtimeExecutable": "npm",
-          "runtimeArgs": [
-              "run-script",
-              "start"
-          ],
-          "env": {
-              "PORT": "3000" // You can specify the port your React.js server uses
-          },
-          "skipFiles": [
-              "<node_internals>/**"
-          ],
-          "outFiles": [],
-          "sourceMaps": true
-      }
+    {
+      "name": "Backend",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/node_modules/npm/bin/npm-cli.js",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/backend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "console": "externalTerminal"
+    },
+    {
+      "name": "Frontend",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/frontend/node_modules/npm/bin/npm-cli.js",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "console": "externalTerminal"
+    }
   ],
   "compounds": [
-      {
-          "name": "Frontend and Chrome",
-          "configurations": ["Start React.js Server", "Launch Chrome against localhost"]
-      }
+    {
+      "name": "Backend & Frontend",
+      "configurations": ["Backend", "Frontend"]
+    }
   ]
 }
