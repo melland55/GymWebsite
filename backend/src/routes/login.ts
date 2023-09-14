@@ -1,15 +1,14 @@
-require('dotenv').config({ path: './.env' });
-const express = require('express');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const mysql = require('mysql');
+import express, { Router, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import mysql from 'mysql';
 
-const saltRounds = 10; // the number of salt rounds to use
-const secretKey = process.env.SECRET_KEY;
+const router: Router = express.Router();
+const saltRounds: number = 10; // the number of salt rounds to use
+const secretKey: string | undefined = process.env.SECRET_KEY;
 
-router.post('/', async (req, res) => {
-  const pool = req.pool;
+router.post('/', async (req: Request, res: Response) => {
+  const pool: mysql.Pool = (req as any).pool;
   const { username, password } = req.body;
   try {
     pool.getConnection((err, connection) => {
@@ -30,7 +29,7 @@ router.post('/', async (req, res) => {
               const { password: hashedPassword, salt } = rows[0];
               const newHashedPassword = await bcrypt.hash(password, salt.toString());
               if (newHashedPassword == hashedPassword.toString()) {
-                const token = jwt.sign({ username }, secretKey, { expiresIn: '1d' });
+                const token = jwt.sign({ username }, secretKey || '', { expiresIn: '1d' });
                 res.json({ token });
               } else {
                 res.status(401).send('Invalid username or password');
@@ -48,15 +47,14 @@ router.post('/', async (req, res) => {
   }
 });
 
-
-router.post('/register', async (req, res) => {
-  const pool = req.pool;
+router.post('/register', async (req: Request, res: Response) => {
+  const pool: mysql.Pool = (req as any).pool;
   const { username, password } = req.body;
   try {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
     const sql = 'INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)';
-    const values = [null, username, hashedPassword, salt, "user", 1];
+    const values = [null, username, hashedPassword, salt, 'user', 1];
     const query = mysql.format(sql, values);
     pool.getConnection((err, connection) => {
       if (err) {
@@ -80,8 +78,8 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/register/member', async (req, res) => {
-  const pool = req.pool;
+router.post('/register/member', async (req: Request, res: Response) => {
+  const pool: mysql.Pool = (req as any).pool;
   const {
     username,
     password,
@@ -141,4 +139,4 @@ router.post('/register/member', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
