@@ -4,7 +4,7 @@
 /node_modules
 
 # Compiled Typescript
-/dist
+/dist/*
 
 # System files
 /uploads/*
