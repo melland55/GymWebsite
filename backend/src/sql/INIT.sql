@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `Members` (
 CREATE TABLE IF NOT EXISTS `Workers` (
     `worker_id` INT PRIMARY KEY AUTO_INCREMENT,
     `user_id` INT NOT NULL,
-    `first_name` VARCHAR(50) NOT NULL,
-    `last_name` VARCHAR(50) NOT NULL,
-    `pin` VARCHAR(255) NOT NULL,
+    `first_name` VARCHAR(50),
+    `last_name` VARCHAR(50),
+    `pin` VARCHAR(4) NOT NULL,
     `is_active` BOOLEAN NOT NULL DEFAULT 1,
     FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
 );
@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS `Workers` (
 CREATE TABLE IF NOT EXISTS `Admins` (
     `admin_id` INT PRIMARY KEY AUTO_INCREMENT,
     `user_id` INT NOT NULL,
-    `first_name` VARCHAR(50) NOT NULL,
-    `last_name` VARCHAR(50) NOT NULL,
-    `pin` VARCHAR(255) NOT NULL,
+    `first_name` VARCHAR(50),
+    `last_name` VARCHAR(50),
+    `pin` VARCHAR(4) NOT NULL,
     `is_active` BOOLEAN NOT NULL DEFAULT 1,
     FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
 );

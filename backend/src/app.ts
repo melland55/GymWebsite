@@ -1,5 +1,5 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
-import mysql, { Pool } from 'mysql';
+import mysql2, { Pool } from 'mysql2/promise';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import loginRouter from './routes/login';
@@ -11,7 +11,7 @@ const app: Express = express();
 const { mysql: mysqlConfig, auth } = config;
 
 // Set up the database connection pool using the configuration from config.ts
-const pool: Pool = mysql.createPool({
+const pool: Pool = mysql2.createPool({
   connectionLimit: 10,
   host: mysqlConfig.host,
   user: mysqlConfig.user,

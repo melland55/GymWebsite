@@ -2,8 +2,8 @@ export default {
   mysql: {
     host: process.env.MYSQL_HOST || 'localhost',
     user: process.env.MYSQL_USER || 'root',
-    password: process.env.MYSQL_PASS || 'password',
-    database: process.env.MYSQL_DB || 'mydb',
+    password: process.env.MYSQL_PASS || 'Codmod3!',
+    database: process.env.MYSQL_DB || 'GymWebsite',
     port: Number(process.env.MYSQL_PORT) || 3306,
   },
   auth: {

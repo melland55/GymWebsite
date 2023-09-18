@@ -30,9 +30,11 @@ const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   }
   jwt.verify(token, secretKey, (err: jwt.VerifyErrors | null, user: any) => {
     if (err) {
+      console.log(err)
       return res.status(403).json({ isAuthenticated: false, message: 'Forbidden' });
     }
     if (user.username !== req.params.username) {
+      console.log(err)
       return res.status(403).json({ isAuthenticated: false, message: 'Forbidden' });
     }
     (req as any).user = user;

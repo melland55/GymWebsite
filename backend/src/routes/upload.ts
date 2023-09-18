@@ -1,7 +1,5 @@
 import express, { Request, Response, NextFunction, Router } from 'express';
 import multer from 'multer';
-import fs from 'fs';
-import path from 'path';
 import { authenticateToken } from '../middlewares/auth';
 
 const jwt = require('jsonwebtoken');
