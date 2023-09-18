@@ -23,8 +23,6 @@ const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   const secretKey = (req as any).secretKey
-  console.log("aaa-" + token);
-  console.log(req.params.username);
   if (token == 'null' || token == null) {
     return res.status(401).json({ isAuthenticated: false, message: 'Unauthorized' });
   }

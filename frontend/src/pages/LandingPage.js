@@ -9,8 +9,6 @@ async function checkUserCredentials() {
 
   // Check if the user is logged in
   if (webToken && username) {
-    console.log(webToken);
-    console.log(username);
     try {
       const response = await axios.get('/account/validate/'+username, {headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}}); // Send request to server to validate JWT
       if (response.status === 200) {
